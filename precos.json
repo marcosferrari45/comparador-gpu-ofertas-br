@@ -1,5 +1,11 @@
 {
-  "atualizado_em": "2026-11-10T21:36:23+00:00",
+  "atualizado_em": "2026-11-10T21:58:18+00:00",
+  "modelos_total": 48,
   "ofertas": [],
-  "erros": []
+  "erros": [
+    {
+      "fonte": "Hardware Barato",
+      "erro": "Consulta da fonte retornou HTTP 403"
+    }
+  ]
 }
