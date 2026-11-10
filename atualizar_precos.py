@@ -24,7 +24,7 @@ HEADERS = {
     "User-Agent": f"{BOT}/1.0 (+https://github.com/marcosferrari45/comparador-gpu-ofertas-br)"
 }
 BRL_PRICE = re.compile(r"R\$\s*((?:\d{1,3}(?:\.\d{3})+|\d+),\d{2})(?!\d)")
-SOURCE_DATE = re.compile(r"Preços verificados em\s+(\d{2}/\d{2}/\d{4}\s+às\s+\d{2}:\d{2})", re.I)
+SOURCE_DATE = re.compile(r"\bEm\s+(\d{1,2}/\d{1,2}(?:/\d{4})?\s+às\s+\d{1,2}h(?:\d{2})?)", re.I)
 EXPLICIT_VRAM = {"RTX3050", "RTX3060", "RTX3080"}
 
 
@@ -105,40 +105,51 @@ def offer(source, model, price, link, source_date=None):
 def price_table(html, source, aliases):
     soup = BeautifulSoup(html, "html.parser")
     source_date = SOURCE_DATE.search(soup.get_text(" ", strip=True))
-    collected = []
     origin = public_url(source["url"])
+    variants = source.get("variantes", {})
+    items = {}
+    matched = set()
     for table in soup.find_all("table"):
         headers = [cell.get_text(" ", strip=True).casefold() for cell in table.find_all("th")]
-        if "modelo" not in headers or "preço" not in headers:
+        expected = ("modelo", "a partir de", "loja", "ofertas em estoque")
+        if not all(header in headers for header in expected):
             continue
-        model_col, price_col = headers.index("modelo"), headers.index("preço")
-        items = {}
+        model_col, price_col, store_col, stock_col = map(headers.index, expected)
         for row in table.find_all("tr"):
             if not row.find("td", recursive=False):
                 continue
             cells = row.find_all(["th", "td"], recursive=False)
-            if len(cells) <= max(model_col, price_col):
+            if len(cells) <= max(model_col, price_col, store_col, stock_col):
                 continue
-            model = aliases.get(normalize_name(cells[model_col].get_text(" ", strip=True)))
-            prices = {m[0] for m in BRL_PRICE.finditer(cells[price_col].get_text(" ", strip=True))}
-            if not model or len(prices) != 1:
+            anchor = cells[model_col].find("a", href=True)
+            if not anchor:
                 continue
-            price = parse_brl(prices.pop())
-            for anchor in row.select("a[href]"):
-                link = urljoin(source["url"], anchor["href"])
-                parsed = urlsplit(link)
-                if (price and parsed.scheme == "https" and parsed.netloc == origin.netloc
-                        and parsed.path.startswith("/produtos/placas-de-video/")
-                        and "/comparar/" not in parsed.path):
-                    if model not in items or price < items[model]["preco"]:
-                        items[model] = offer(source, model, price, link, source_date[1] if source_date else None)
-                    break
-        if items:
-            collected.append(items)
-    if not collected:
-        raise ValueError("Tabela de preços sem correspondências verificáveis no catálogo")
-    return list(max(collected, key=len).values())
-
+            link = urljoin(source["url"], anchor["href"])
+            parsed = urlsplit(link)
+            slug = re.fullmatch(r"/gpu/([a-z0-9-]+)/?", parsed.path)
+            if parsed.scheme != "https" or parsed.netloc != origin.netloc or not slug:
+                continue
+            label = normalize_name(anchor.get_text(" ", strip=True))
+            name = variants.get(slug[1])
+            model = aliases.get(normalize_name(name)) if name else aliases.get(label)
+            if not model:
+                continue
+            matched.add(model)
+            stock = cells[stock_col].get_text(" ", strip=True)
+            price_text = cells[price_col].get_text(" ", strip=True)
+            if not stock.isdecimal() or int(stock) <= 0 or not BRL_PRICE.fullmatch(price_text):
+                continue
+            price = parse_brl(price_text)
+            if not price or (model in items and price >= items[model]["preco"]):
+                continue
+            quote = offer(source, model, price, link, source_date[1] if source_date else None)
+            shop = re.sub(r"\s*\+\d+\s*$", "", cells[store_col].get_text(" ", strip=True))
+            if shop and shop != "—":
+                quote["loja"] = shop + " · " + source["loja"]
+            items[model] = quote
+    if not matched:
+        raise ValueError("Tabela de ofertas sem correspondências verificáveis no catálogo")
+    return list(items.values())
 
 def objects(value):
     if isinstance(value, dict):
@@ -195,7 +206,7 @@ def main():
                 continue
             try:
                 html = fetch_page(source["url"], session, robots)
-                reader = price_table if source.get("tipo") == "tabela_hardware_barato" else product_offer
+                reader = price_table if source.get("tipo") == "tabela_radar_gpu" else product_offer
                 prices.extend(reader(html, source, aliases))
             except (KeyError, ValueError, requests.RequestException, RecursionError) as error:
                 errors.append({"fonte": source.get("loja", "Fonte"), "erro": str(error)[:180]})

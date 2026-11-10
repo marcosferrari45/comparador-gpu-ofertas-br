@@ -2,10 +2,18 @@
   "intervalo_segundos": 2,
   "fontes": [
     {
-      "id": "hardware-barato-placas",
-      "tipo": "tabela_hardware_barato",
-      "loja": "Hardware Barato",
-      "url": "https://www.hardwarebarato.com/produtos/placas-de-video",
+      "id": "radargpu-placas",
+      "tipo": "tabela_radar_gpu",
+      "loja": "RadarGPU",
+      "url": "https://radargpu.com.br/gpu/",
+      "variantes": {
+        "rtx-5060-ti": "RTX 5060 Ti 16 GB",
+        "rtx-4060-ti": "RTX 4060 Ti 8 GB",
+        "rtx-3080": "RTX 3080 10 GB",
+        "rtx-3060": "RTX 3060 12 GB",
+        "rtx-3050": "RTX 3050 8 GB",
+        "rx-9060-xt": "RX 9060 XT 16 GB"
+      },
       "ativo": true
     }
   ]
