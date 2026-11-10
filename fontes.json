@@ -1,0 +1,19 @@
+{
+  "intervalo_segundos": 2,
+  "fontes": [
+    {
+      "id": "rtx-3060-ti-exemplo",
+      "modelo": "RTX 3060 Ti 8 GB",
+      "loja": "Loja de exemplo",
+      "url": "https://exemplo.com/produto-rtx-3060-ti",
+      "ativo": false
+    },
+    {
+      "id": "rx-9060-xt-16-exemplo",
+      "modelo": "RX 9060 XT 16 GB",
+      "loja": "Loja de exemplo",
+      "url": "https://exemplo.com/produto-rx-9060-xt-16gb",
+      "ativo": false
+    }
+  ]
+}
