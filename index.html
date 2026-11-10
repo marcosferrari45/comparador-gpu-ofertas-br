@@ -6,60 +6,342 @@
 <title>Comparador de ofertas de placas de vídeo</title>
 <style>
 :root{--bg:#07111f;--panel:#101d2e;--panel2:#14243a;--text:#edf5ff;--muted:#9db0c8;--line:#2b3e58;--accent:#55d6be;--accent2:#66a8ff;--warn:#ffca68;--danger:#ff7c88;--shadow:0 14px 35px #0005}*{box-sizing:border-box}body{margin:0;background:linear-gradient(160deg,#07111f,#0b1627 55%,#0d1a2b);color:var(--text);font:15px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif}main{width:min(100%,780px);margin:auto;padding:18px 14px 54px}.hero{padding:8px 2px 16px}.eyebrow{color:var(--accent);font-weight:800;text-transform:uppercase;letter-spacing:.12em;font-size:.72rem}.hero h1{font-size:clamp(1.65rem,7vw,2.5rem);line-height:1.08;margin:.3rem 0 .65rem}.hero p{margin:0;color:var(--muted)}.panel{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:18px;padding:14px;box-shadow:var(--shadow);margin:12px 0}.grid{display:grid;gap:11px}.add-grid{grid-template-columns:1fr}.settings{grid-template-columns:repeat(2,1fr)}label{display:grid;gap:6px;color:#c9d7e8;font-weight:700;font-size:.85rem}input,select,button{font:inherit}input,select{width:100%;min-height:46px;border-radius:12px;border:1px solid #3b506d;background:#0a1626;color:var(--text);padding:10px 12px;outline:none}input:focus,select:focus{border-color:var(--accent);box-shadow:0 0 0 3px #55d6be22}button{border:0;border-radius:12px;min-height:46px;padding:10px 14px;font-weight:800;cursor:pointer}.primary{background:var(--accent);color:#041815}.secondary{background:#253a56;color:var(--text)}.danger{background:#4b2631;color:#ffd9df}.wide{width:100%}.section-head{display:flex;align-items:end;justify-content:space-between;gap:12px;margin:20px 2px 8px}.section-head h2{margin:0;font-size:1.15rem}.muted,.meta{color:var(--muted)}.meta{font-size:.82rem}.notice{border:1px solid #67552e;background:#2d2718;color:#ffe2a4;border-radius:14px;padding:11px 12px;margin:10px 0}.best-notice{border-color:#26685d;background:#11362f;color:#bdf8eb}.cards{display:grid;gap:11px}.card{position:relative;background:#101d2e;border:1px solid var(--line);border-radius:17px;padding:15px;box-shadow:0 8px 20px #0003}.card.best{border-color:var(--accent);box-shadow:0 0 0 2px #55d6be25,0 12px 28px #0005}.rank{position:absolute;right:13px;top:13px;color:#7890ac;font-size:1.35rem;font-weight:900}.badge{display:inline-flex;background:#123c35;color:#aef4e6;border:1px solid #2d7467;padding:4px 8px;border-radius:999px;font-size:.72rem;font-weight:900;margin-bottom:9px}.card h3{margin:0 50px 4px 0;font-size:1.08rem}.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin:13px 0}.stat{background:#0a1626;border-radius:11px;padding:9px}.stat small{display:block;color:var(--muted);font-size:.7rem}.stat strong{display:block;margin-top:2px}.actions{display:flex;gap:8px}.actions button{flex:1;min-height:40px}.empty{text-align:center;color:var(--muted);padding:24px 8px}.reference{display:flex;justify-content:space-between;gap:16px;align-items:center}.reference strong{display:block}.reference span{color:var(--muted);font-size:.83rem}.source{font-size:.78rem;color:var(--muted);margin-top:12px}.source a{color:#9ac7ff}.footer-note{color:var(--muted);font-size:.78rem;margin:16px 2px}.hidden{display:none!important}@media(min-width:640px){main{padding-top:30px}.add-grid{grid-template-columns:1.5fr .8fr auto;align-items:end}.add-grid button{min-width:120px}.settings{grid-template-columns:repeat(3,1fr)}.cards{grid-template-columns:repeat(2,1fr)}}@media(prefers-color-scheme:light){:root{--bg:#eef4fa;--panel:#fff;--panel2:#fff;--text:#132034;--muted:#5d6e83;--line:#d5e0eb;--shadow:0 12px 30px #23364d17}body{background:#eef4fa}input,select{background:#f7fafc;color:#132034}.stat{background:#f4f7fa}.secondary{background:#e4edf6;color:#20334c}.danger{background:#ffe7ea;color:#7d2631}.card{background:#fff}.notice{background:#fff7df}.best-notice{background:#e7fff8;color:#145746}}
+
+#autoStatus { margin-top: 10px; }
+.count { color: var(--accent); font-size: .82rem; font-weight: 750; }
+.catalog-filter { margin: 12px 0 5px; }
+#marketNote { margin: 8px 2px 12px; }
+.market-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 9px; }
+.market-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 6px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 13px;
+  padding: 12px 14px;
+  min-width: 0;
+}
+.market-row.best { border-color: var(--accent); box-shadow: inset 3px 0 var(--accent); }
+.market-name h3 { margin: 0; font-size: 1rem; overflow-wrap: anywhere; }
+.market-name p { margin: 2px 0 0; }
+.market-name .badge { margin: 6px 0 0; }
+.market-values {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 0;
+  gap: 9px;
+  padding: 7px 0 2px;
+  border-top: 1px solid var(--line);
+}
+.market-values dt { color: var(--muted); font-size: .71rem; }
+.market-values dd { margin: 1px 0 0; font-weight: 750; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.market-link a { color: var(--accent2); display: inline-block; padding-block: 6px; font-size: .82rem; }
+.market-link:empty { display: none; }
+.manual { margin-top: 20px; }
+.manual summary { font-weight: 750; cursor: pointer; }
+.manual-list { margin-top: 12px; }
+.manual-list .actions { margin-top: 8px; }
+#cancelEdit { margin-top: 8px; }
+.source p { margin: 0 0 5px; }
+@media (min-width: 640px) {
+  main { width: min(100%, 860px); }
+  .market-row { grid-template-columns: minmax(0, 1fr) minmax(295px, 1.25fr) 94px; align-items: center; }
+  .market-values { border-top: 0; padding: 0; }
+  .market-link { text-align: right; }
+}
+@media (prefers-color-scheme: light) {
+  .count { color: #126555; }
+  .market-link a, .source a { color: #165f9d; }
+}
 </style>
 </head>
 <body><main>
-<header class="hero"><div class="eyebrow">Comparador local</div><h1>Qual GPU entrega mais por real?</h1><p>Compare ofertas por FPS nativo em rasterização. As ofertas automáticas vêm de <code>precos.json</code>; suas ofertas manuais ficam neste navegador.</p><div id="autoStatus" class="meta" aria-live="polite" style="margin-top:8px">Carregando preços do dia…</div></header>
-<section class="panel" aria-labelledby="addTitle"><h2 id="addTitle" style="margin-top:0">Adicionar oferta</h2><form id="offerForm" class="grid add-grid"><label>Modelo<input id="model" list="models" placeholder="Ex.: RX 9060 XT 16 GB" autocomplete="off" required><datalist id="models"></datalist></label><label>Preço em R$<input id="price" type="number" inputmode="decimal" min="0.01" step="0.01" placeholder="2700" required></label><button class="primary" id="submitBtn" type="submit">Adicionar</button></form><button type="button" class="secondary wide hidden" id="cancelEdit" style="margin-top:9px">Cancelar edição</button></section>
-<section class="panel"><div class="grid settings"><label>Resolução<select id="resolution"><option value="4k" selected>4K</option><option value="1440p">1440p</option><option value="1080p">1080p</option></select></label><label>Meta de FPS<input id="target" type="number" inputmode="numeric" min="1" max="500" value="60"></label><label>Teto opcional (R$)<input id="budget" type="number" inputmode="decimal" min="0" step="0.01" placeholder="Sem teto"></label></div></section>
-<section class="panel reference"><div><strong>Radeon 780M</strong><span>Referência integrada do Ryzen 7 8700G</span></div><div class="meta">Sem FPS nesta base</div></section>
-<div class="section-head"><div><h2>Ranking das ofertas</h2><div class="meta" id="summary"></div></div></div><div id="message" aria-live="polite"></div><div class="cards" id="ranking"></div>
-<div class="section-head"><h2>Sem benchmark</h2></div><div class="cards" id="unranked"></div>
-<p class="footer-note">FPS médios <strong>nativos</strong>. FSR e DLSS podem alterar o desempenho em jogos compatíveis. Resultados de Time Spy não são misturados com FPS e não fazem parte deste ranking.</p>
-<section class="panel source"><strong>Fonte dos FPS:</strong> <a href="https://www.tomshardware.com/reviews/gpu-hierarchy,4388.html" target="_blank" rel="noopener noreferrer">Tom’s Hardware GPU Benchmarks Hierarchy 2026</a>. Valores embutidos conforme a tabela fornecida: mesma edição e tabela de rasterização.</section>
+<header class="hero">
+  <div class="eyebrow">Comparador de GPUs</div>
+  <h1>Preço e desempenho em uma lista</h1>
+  <p>Veja as cotações à vista do catálogo e compare o custo por FPS na resolução que você joga.</p>
+  <div id="autoStatus" class="meta" role="status">Carregando a última consulta…</div>
+</header>
+
+<section class="panel" aria-label="Configuração da comparação">
+  <div class="grid settings">
+    <label>Resolução<select id="resolution">
+      <option value="4k" selected>4K</option>
+      <option value="1440p">1440p</option>
+      <option value="1080p">1080p</option>
+    </select></label>
+    <label>Meta de FPS<input id="target" type="number" inputmode="numeric" min="1" max="500" value="60"></label>
+    <label>Teto de preço (R$)<input id="budget" type="number" inputmode="decimal" min="0" step="0.01" placeholder="Opcional"></label>
+  </div>
+</section>
+
+<section aria-labelledby="catalogTitle">
+  <div class="section-head">
+    <h2 id="catalogTitle">Todas as placas</h2>
+    <span id="modelCount" class="count"></span>
+  </div>
+  <label class="catalog-filter">Buscar modelo ou VRAM
+    <input id="catalogSearch" type="search" placeholder="Ex.: RX 9060 XT 16 GB" autocomplete="off">
+  </label>
+  <p id="marketNote" class="meta" aria-live="polite"></p>
+  <ul id="marketList" class="market-list" aria-label="Catálogo e preços das placas de vídeo"></ul>
+</section>
+
+<details class="panel manual">
+  <summary>Minhas ofertas manuais <span id="manualCount" class="meta"></span></summary>
+  <p class="meta">As ofertas cadastradas aqui ficam neste navegador e têm ranking próprio.</p>
+  <form id="offerForm" class="grid add-grid">
+    <label>Modelo
+      <input id="model" list="models" placeholder="Ex.: RX 9060 XT 16 GB" autocomplete="off" required>
+      <datalist id="models"></datalist>
+    </label>
+    <label>Preço em R$<input id="price" type="number" inputmode="decimal" min="0.01" step="0.01" placeholder="2700" required></label>
+    <button class="primary" id="submitBtn" type="submit">Adicionar</button>
+  </form>
+  <button type="button" class="secondary wide hidden" id="cancelEdit">Cancelar edição</button>
+  <div id="ranking" class="cards manual-list" aria-label="Ranking de ofertas manuais"></div>
+</details>
+
+<section class="panel reference" aria-label="Placa de vídeo atual">
+  <div><strong>Radeon 780M</strong><span>Vídeo integrado do Ryzen 7 8700G</span></div>
+  <div class="meta">Referência do seu PC</div>
+</section>
+<section class="panel source">
+  <p>FPS médios nativos em rasterização. FSR e DLSS podem alterar o desempenho. <a href="https://www.tomshardware.com/reviews/gpu-hierarchy,4388.html" target="_blank" rel="noopener noreferrer">Tom’s Hardware · Tabela de 2026</a></p>
+  <p>Os preços à vista vêm da tabela de ofertas da fonte. Confira frete, condição de pagamento e disponibilidade na página indicada. <a href="https://www.hardwarebarato.com/produtos/placas-de-video" target="_blank" rel="noopener noreferrer">Hardware Barato · Placas de vídeo</a></p>
+</section>
 </main>
 <script>
-(()=>{'use strict';
-const DB={
- 'RTX 3060 Ti 8 GB':{vram:'8 GB',fps:{'1080p':74.2,'1440p':51.0,'4k':19.4}},
- 'RX 9060 XT 16 GB':{vram:'16 GB',fps:{'1080p':98.3,'1440p':67.3,'4k':35.2}},
- 'RX 9060 XT 8 GB':{vram:'8 GB',fps:null}
-};
-const $=s=>document.querySelector(s), key='gpuOffers.v1';
-let offers=[], editing=null;
-try{const x=JSON.parse(localStorage.getItem(key)||'[]');offers=Array.isArray(x)?x:[]}catch{}
-if(!offers.length) offers=[{id:crypto.randomUUID(),model:'RTX 3060 Ti 8 GB',price:1800,source:'manual'},{id:crypto.randomUUID(),model:'RX 9060 XT 16 GB',price:2700,source:'manual'}];
-$('#models').innerHTML=Object.keys(DB).map(x=>`<option value="${x}"></option>`).join('');
-const money=n=>new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL'}).format(n);
-const num=n=>new Intl.NumberFormat('pt-BR',{minimumFractionDigits:1,maximumFractionDigits:1}).format(n);
-function save(){localStorage.setItem(key,JSON.stringify(offers))}
-function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-function card(o,rank,best,fps,cost){return `<article class="card ${best?'best':''}">${rank?`<div class="rank">#${rank}</div>`:''}${best?'<div class="badge">Melhor compra para a meta</div>':''}<h3>${esc(o.model)}</h3><div class="meta">VRAM: ${DB[o.model]?.vram||'Não informada'}${o.loja?' • '+esc(o.loja):''}${o.source==='auto'?' • preço automático':''}</div>${o.url?`<div class="meta"><a href="${esc(o.url)}" target="_blank" rel="noopener noreferrer" style="color:#9ac7ff">Abrir oferta</a></div>`:''}<div class="stats"><div class="stat"><small>Preço</small><strong>${money(o.price)}</strong></div>${fps?`<div class="stat"><small>FPS médio nativo</small><strong>${num(fps)} FPS</strong></div><div class="stat"><small>Custo por FPS</small><strong>${money(cost)}/FPS</strong></div>`:'<div class="stat"><small>Desempenho</small><strong>Sem benchmark</strong></div>'}</div><div class="actions"><button type="button" class="secondary" data-edit="${o.id}">Editar</button><button type="button" class="danger" data-delete="${o.id}">Excluir</button></div></article>`}
-function render(){
- const res=$('#resolution').value,target=Math.max(1,Number($('#target').value)||60),b=Number($('#budget').value),hasBudget=Number.isFinite(b)&&b>0;
- const ranked=offers.filter(o=>DB[o.model]?.fps?.[res]).map(o=>({...o,fps:DB[o.model].fps[res],cost:o.price/DB[o.model].fps[res]})).sort((a,b)=>a.cost-b.cost);
- const eligible=ranked.filter(o=>o.fps>=target&&(!hasBudget||o.price<=b)); const best=eligible[0]?.id;
- $('#summary').textContent=`${offers.length} oferta(s) • ${res==='4k'?'4K':res} • meta ${target} FPS${hasBudget?' • teto '+money(b):''}`;
- $('#message').innerHTML=ranked.length?(best?`<div class="notice best-notice">Há oferta que atinge a meta${hasBudget?' dentro do teto':''}. O destaque considera primeiro o menor custo por FPS.</div>`:`<div class="notice">Nenhuma oferta com benchmark atinge a meta${hasBudget?' dentro do teto informado':''}. O ranking por custo por FPS continua visível.</div>`):'<div class="notice">Adicione uma oferta com benchmark para gerar o ranking.</div>';
- $('#ranking').innerHTML=ranked.length?ranked.map((o,i)=>card(o,i+1,o.id===best,o.fps,o.cost)).join(''):'<div class="empty">Nenhuma oferta classificada.</div>';
- const un=offers.filter(o=>!DB[o.model]?.fps?.[res]); $('#unranked').innerHTML=un.length?un.map(o=>card(o,null,false,null,null)).join(''):'<div class="empty">Nenhuma oferta sem benchmark.</div>';
- save();
-}
-$('#offerForm').addEventListener('submit',e=>{e.preventDefault();const model=$('#model').value.trim(),price=Number($('#price').value);if(!model||!Number.isFinite(price)||price<=0)return;if(editing){const o=offers.find(x=>x.id===editing);if(o){o.model=model;o.price=price}}else offers.push({id:crypto.randomUUID(),model,price,source:'manual'});editing=null;e.target.reset();$('#submitBtn').textContent='Adicionar';$('#cancelEdit').classList.add('hidden');render()});
-$('#cancelEdit').addEventListener('click',()=>{editing=null;$('#offerForm').reset();$('#submitBtn').textContent='Adicionar';$('#cancelEdit').classList.add('hidden')});
-document.addEventListener('click',e=>{const id=e.target.dataset.edit||e.target.dataset.delete;if(!id)return;if(e.target.dataset.delete){offers=offers.filter(o=>o.id!==id);if(editing===id)$('#cancelEdit').click();render();return}const o=offers.find(x=>x.id===id);if(o){editing=id;$('#model').value=o.model;$('#price').value=o.price;$('#submitBtn').textContent='Salvar';$('#cancelEdit').classList.remove('hidden');scrollTo({top:0,behavior:'smooth'});$('#model').focus()}});
-['resolution','target','budget'].forEach(id=>$('#'+id).addEventListener('input',render));
-async function loadDailyPrices(){
- const status=$('#autoStatus');
- try{
-  const r=await fetch('./precos.json',{cache:'no-store'}); if(!r.ok) throw new Error('HTTP '+r.status);
-  const data=await r.json(); if(!data||!Array.isArray(data.ofertas)) throw new Error('JSON inválido');
-  const auto=data.ofertas.filter(x=>x&&x.modelo&&Number(x.preco)>0).map((x,i)=>({id:'auto-'+String(x.id||i),model:String(x.modelo).trim(),price:Number(x.preco),loja:String(x.loja||''),url:String(x.url||''),source:'auto'}));
-  offers=offers.filter(o=>o.source!=='auto').concat(auto);
-  status.textContent=`${auto.length} oferta(s) automática(s) carregada(s) • atualização ${data.atualizado_em||'não informada'}`;
-  render();
- }catch(err){status.textContent=location.protocol==='file:'?'Modo local: use “python -m http.server” para permitir a leitura de precos.json.':'Não foi possível carregar precos.json; mantendo ofertas salvas.';render()}
-}
-render();loadDailyPrices();
+(() => {
+  "use strict";
+
+  const byId = (id) => document.getElementById(id);
+  const storageKey = "gpuOffers.v1";
+  const money = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
+  const fpsNumber = new Intl.NumberFormat("pt-BR", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+  const dateTime = new Intl.DateTimeFormat("pt-BR", {
+    dateStyle: "short", timeStyle: "short", timeZone: "America/Sao_Paulo"
+  });
+  const escape = (value) => String(value).replace(/[&<>"']/g, (c) => ({
+    "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+  })[c]);
+  const normalize = (value) => String(value).toLowerCase().replace(/[^a-z0-9]/g, "");
+  const positive = (value) => Number.isFinite(value) && value > 0;
+  let catalog = [];
+  let models = new Map();
+  let quotes = new Map();
+  let queryStatus = "loading";
+  let manual = loadManual();
+  let editing = null;
+
+  function loadManual() {
+    try {
+      const values = JSON.parse(localStorage.getItem(storageKey) || "[]");
+      return Array.isArray(values) ? values.filter((item) =>
+        item && item.source !== "auto" && typeof item.id === "string" &&
+        typeof item.model === "string" && positive(item.price)
+      ) : [];
+    } catch {
+      return [];
+    }
+  }
+
+  function saveManual() {
+    try {
+      localStorage.setItem(storageKey, JSON.stringify(manual));
+    } catch {
+      byId("manualCount").textContent = "• Armazenamento indisponível";
+    }
+  }
+
+  function safeLink(value) {
+    try {
+      const url = new URL(value);
+      return url.protocol === "https:" && !url.username && !url.password ? url.href : "";
+    } catch {
+      return "";
+    }
+  }
+
+  function filters() {
+    const resolution = byId("resolution").value;
+    return {
+      resolution,
+      target: Math.max(1, Number(byId("target").value) || 60),
+      budget: Number(byId("budget").value) || Infinity
+    };
+  }
+
+  function stat(label, value) {
+    return '<div><dt>' + label + '</dt><dd>' + escape(value) + '</dd></div>';
+  }
+
+  function marketCard(card, best, budget) {
+    const quote = card.quote;
+    const status = quote ? (quote.preco > budget ? "Acima do teto" : quote.loja)
+      : queryStatus === "error" ? "Consulta indisponível"
+      : queryStatus === "old" ? "Coleta atrasada" : "Sem preço na fonte";
+    const badge = best ? '<span class="badge">Melhor compra para a meta</span>' : "";
+    const price = quote ? money.format(quote.preco) : "—";
+    const cost = quote ? money.format(card.cost) : "—";
+    const link = quote ? '<a href="' + escape(quote.url) +
+      '" target="_blank" rel="noopener noreferrer">Ver na fonte</a>' : "";
+    return '<li class="market-row' + (best ? " best" : "") + '">' +
+      '<div class="market-name"><h3>' + escape(card.modelo) + '</h3>' +
+      '<p class="meta">' + escape(status) + '</p>' + badge + '</div>' +
+      '<dl class="market-values">' + stat("Preço à vista", price) +
+      stat("FPS nativo", fpsNumber.format(card.fps)) + stat("R$/FPS", cost) + '</dl>' +
+      '<div class="market-link">' + link + '</div></li>';
+  }
+
+  function renderMarket() {
+    const { resolution, target, budget } = filters();
+    const search = normalize(byId("catalogSearch").value);
+    const entries = catalog.filter((card) => normalize(card.modelo).includes(search)).map((card) => {
+      const quote = quotes.get(normalize(card.modelo));
+      const fps = card.fps[resolution];
+      return { modelo: card.modelo, quote, fps, cost: quote ? quote.preco / fps : Infinity };
+    });
+    entries.sort((a, b) => a.cost - b.cost || b.fps - a.fps || a.modelo.localeCompare(b.modelo, "pt-BR"));
+    const best = entries.find((card) => card.quote && card.fps >= target && card.quote.preco <= budget);
+    byId("modelCount").textContent = catalog.length ? entries.length + " de " + catalog.length + " modelos" : "";
+    const resolutionLabel = resolution === "4k" ? "4K" : resolution;
+    byId("marketNote").textContent = quotes.size
+      ? best
+        ? "Destaque para a melhor oferta que alcança " + target + " FPS em " + resolutionLabel + " dentro dos filtros."
+        : "As ofertas visíveis estão abaixo da meta de " + target + " FPS ou acima do teto em " + resolutionLabel + "."
+      : "Os FPS do catálogo continuam disponíveis enquanto aguardamos cotações.";
+    byId("marketList").innerHTML = entries.map((card) => marketCard(card, card === best, budget)).join("");
+    if (catalog.length && !entries.length) {
+      byId("marketList").innerHTML = '<li class="empty">Nenhum modelo encontrado.</li>';
+    }
+  }
+
+  function renderManual() {
+    const { resolution, target, budget } = filters();
+    const entries = manual.map((item) => {
+      const fps = models.get(normalize(item.model))?.fps[resolution] ?? null;
+      return { ...item, fps, cost: fps ? item.price / fps : Infinity };
+    });
+    entries.sort((a, b) => a.cost - b.cost || a.price - b.price);
+    const best = entries.find((item) => item.fps >= target && item.price <= budget);
+    byId("manualCount").textContent = "• " + manual.length;
+    byId("ranking").innerHTML = entries.length ? entries.map((item) => {
+      const badge = item === best ? '<span class="badge">Melhor oferta manual para a meta</span>' : "";
+      const performance = item.fps ? ' · ' + fpsNumber.format(item.fps) + ' FPS · ' + money.format(item.cost) + '/FPS' : ' · Sem benchmark';
+      return '<article class="card"><h3>' + escape(item.model) + '</h3>' +
+        '<p class="meta">' + escape(money.format(item.price) + performance) + '</p>' + badge +
+        '<div class="actions"><button type="button" class="secondary" data-edit="' + escape(item.id) + '">Editar</button>' +
+        '<button type="button" class="danger" data-delete="' + escape(item.id) + '">Excluir</button></div></article>';
+    }).join("") : '<div class="empty">Adicione uma oferta para comparar.</div>';
+  }
+
+  function refresh() {
+    renderMarket();
+    renderManual();
+  }
+
+  function resetForm() {
+    editing = null;
+    byId("offerForm").reset();
+    byId("submitBtn").textContent = "Adicionar";
+    byId("cancelEdit").classList.add("hidden");
+  }
+
+  byId("offerForm").addEventListener("submit", (event) => {
+    event.preventDefault();
+    const text = byId("model").value.trim();
+    const model = models.get(normalize(text))?.modelo || text;
+    const price = Number(byId("price").value);
+    if (!model || !positive(price)) return;
+    const offer = { id: editing ?? crypto.randomUUID(), model, price, source: "manual" };
+    if (editing) manual = manual.map((item) => item.id === editing ? offer : item);
+    else manual.push(offer);
+    resetForm();
+    refresh();
+    saveManual();
+  });
+
+  byId("cancelEdit").addEventListener("click", resetForm);
+  byId("ranking").addEventListener("click", (event) => {
+    const button = event.target.closest("button");
+    if (!button) return;
+    if (button.dataset.delete) {
+      manual = manual.filter((item) => item.id !== button.dataset.delete);
+      if (editing === button.dataset.delete) resetForm();
+      refresh();
+      saveManual();
+    } else {
+      const item = manual.find((offer) => offer.id === button.dataset.edit);
+      if (!item) return;
+      editing = item.id;
+      byId("model").value = item.model;
+      byId("price").value = item.price;
+      byId("submitBtn").textContent = "Salvar";
+      byId("cancelEdit").classList.remove("hidden");
+      byId("model").focus();
+    }
+  });
+
+  for (const id of ["resolution", "target", "budget", "catalogSearch"]) {
+    byId(id).addEventListener("input", refresh);
+  }
+
+  async function json(path) {
+    const response = await fetch(path, { cache: "no-store" });
+    if (!response.ok) throw new Error("HTTP " + response.status);
+    return response.json();
+  }
+
+  async function load() {
+    const [benchmark, feed] = await Promise.allSettled([json("./catalogo.json"), json("./precos.json")]);
+    const status = byId("autoStatus");
+    if (benchmark.status !== "fulfilled" || !Array.isArray(benchmark.value.modelos)) {
+      status.textContent = "Não foi possível carregar o catálogo.";
+      return;
+    }
+    catalog = benchmark.value.modelos.filter((card) =>
+      card && typeof card.modelo === "string" && ["4k", "1440p", "1080p"].every((res) => positive(card.fps?.[res]))
+    );
+    models = new Map(catalog.map((card) => [normalize(card.modelo), card]));
+    byId("models").replaceChildren(...catalog.map((card) => {
+      const option = document.createElement("option");
+      option.value = card.modelo;
+      return option;
+    }));
+
+    const data = feed.status === "fulfilled" ? feed.value : null;
+    const checkedAt = new Date(data?.atualizado_em || "");
+    const errors = Array.isArray(data?.erros) ? data.erros : [];
+    if (!data || !Array.isArray(data.ofertas) || !Number.isFinite(checkedAt.getTime())) {
+      queryStatus = "error";
+      status.textContent = "Aguardando uma consulta de preços válida.";
+    } else if (Date.now() - checkedAt.getTime() > 48 * 60 * 60 * 1000) {
+      queryStatus = "old";
+      status.textContent = "Última consulta em " + dateTime.format(checkedAt) + " · coleta atrasada.";
+    } else {
+      queryStatus = errors.length ? "error" : "ok";
+      for (const item of data.ofertas) {
+        if (!item || item.moeda !== "BRL" || !positive(item.preco)) continue;
+        const key = normalize(item.modelo);
+        const url = safeLink(item.url);
+        if (!models.has(key) || !url) continue;
+        const previous = quotes.get(key);
+        if (!previous || item.preco < previous.preco) quotes.set(key, { ...item, url });
+      }
+      const sourceDate = [...quotes.values()].find((item) => item.fonte_em)?.fonte_em;
+      const sourceText = sourceDate ? " · preços da fonte em " + sourceDate : "";
+      const errorText = errors.length ? " · Falha na fonte: " + errors.map((item) => item.erro).join(" · ") : "";
+      status.textContent = quotes.size + " de " + catalog.length + " modelos com preço · consulta em " +
+        dateTime.format(checkedAt) + sourceText + errorText;
+    }
+    refresh();
+  }
+
+  refresh();
+  load();
 })();
-</script></body></html>
+</script>
+</body>
+</html>

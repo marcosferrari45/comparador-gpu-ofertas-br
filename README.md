@@ -1,26 +1,17 @@
-# Comparador automático de ofertas de GPU
+# Comparador de ofertas de GPU
 
-## Uso local
+A página do GitHub Pages lista as 48 GPUs de desktop em um único catálogo. Selecione 4K, 1440p ou 1080p para recalcular o custo por FPS. O destaque considera a meta de FPS e o teto de preço. A seção **Minhas ofertas manuais** mantém os preços cadastrados neste navegador.
 
-1. Edite `fontes.json`, troque as URLs de exemplo por páginas reais de produtos e marque `ativo` como `true`.
-2. Respeite os termos de uso e o `robots.txt` de cada loja. Prefira APIs ou feeds oficiais quando existirem.
-3. Rode:
+- **Desempenho** — média de FPS nativos da tabela de rasterização do Tom’s Hardware de 2026, em catalogo.json.
+- **Preços** — menor valor à vista publicado na tabela brasileira do [Hardware Barato](https://www.hardwarebarato.com/produtos/placas-de-video), conforme a versão da GPU e a VRAM. A página identifica a origem e abre a oferta na fonte.
+- **Atualização** — o workflow Atualizar preços e publicar roda diariamente às 10h17 UTC (07h17 em Brasília) e também pode ser iniciado manualmente. Ele gera o precos.json deste repositório e publica a página.
 
-```bash
-python -m pip install -r requirements.txt
-python atualizar_precos.py
-python -m http.server 8000
-```
+A lista inclui placas sem cotação na fonte. Falhas de consulta são registradas no precos.json e mostradas na página. A coleta usa dados públicos, respeita o robots.txt e não tenta contornar bloqueios. Os preços publicados pela fonte variam conforme disponibilidade e condições da loja.
 
-Abra `http://localhost:8000`. Abrir o HTML diretamente por `file://` pode impedir o `fetch` de `precos.json`.
+## Rodar localmente
 
-## GitHub Actions + Pages
+    python -m pip install -r requirements.txt
+    python atualizar_precos.py
+    python -m http.server 8000
 
-1. Envie todos os arquivos para a raiz de um repositório no GitHub.
-2. Em **Settings > Pages > Source**, escolha **GitHub Actions**.
-3. Edite `fontes.json`, ative as fontes e execute manualmente o workflow uma vez em **Actions**.
-4. O workflow roda diariamente às 10:17 UTC, atualiza `precos.json`, salva a alteração e publica a página.
-
-## Limitações
-
-O robô procura dados estruturados JSON-LD do tipo `Product`/`Offer`. Sites com proteção antibot, conteúdo renderizado apenas por JavaScript ou marcação diferente podem falhar. Nesses casos, use uma API/feed oficial ou crie um adaptador específico. Erros ficam registrados em `precos.json`, e o último preço válido é preservado quando possível.
+Abra http://localhost:8000. Para incluir uma fonte de produto, edite fontes.json com uma URL HTTPS pública do anúncio, o nome exato do modelo e a loja. O leitor de páginas individuais exige oferta em BRL e disponibilidade em JSON-LD.
