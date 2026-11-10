@@ -1,20 +1,5 @@
 {
-  "atualizado_em": "2026-11-10T19:59:00+00:00",
-  "ofertas": [
-    {
-      "id": "validacao-3060ti",
-      "modelo": "RTX 3060 Ti 8 GB",
-      "preco": 1800.0,
-      "loja": "Preço fictício de validação",
-      "url": ""
-    },
-    {
-      "id": "validacao-9060xt",
-      "modelo": "RX 9060 XT 16 GB",
-      "preco": 2700.0,
-      "loja": "Preço fictício de validação",
-      "url": ""
-    }
-  ],
+  "atualizado_em": "2026-11-10T21:36:23+00:00",
+  "ofertas": [],
   "erros": []
 }
