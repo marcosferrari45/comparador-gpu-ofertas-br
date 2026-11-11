@@ -54,13 +54,73 @@
   .count { color: #126555; }
   .market-link a, .source a { color: #165f9d; }
 }
+.map-panel { padding: 16px; scroll-margin-top: 12px; }
+.map-heading { display: flex; gap: 12px; align-items: flex-start; justify-content: space-between; }
+.map-heading h2 { font-size: 1.2rem; margin: 0 0 4px; }
+.map-heading p { margin: 0; }
+.map-chip { padding: 5px 9px; border: 1px solid var(--line); border-radius: 8px; color: var(--accent); font-size: .75rem; white-space: nowrap; }
+.map-tabs { display: flex; gap: 6px; padding: 5px; margin: 16px 0 14px; border: 1px solid var(--line); border-radius: 13px; background: var(--bg); }
+.map-tabs button { flex: 1; padding: 9px 5px; min-height: 44px; background: transparent; color: var(--muted); font-size: .86rem; }
+.map-tabs button[aria-pressed="true"] { background: var(--accent); color: #05261f; }
+.map-controls { display: grid; grid-template-columns: 1fr; gap: 10px; }
+.map-controls input, .map-controls select { min-width: 0; }
+.map-summary { margin: 14px 0 8px; }
+.map-legend { display: flex; flex-wrap: wrap; gap: 12px; margin: 0 0 12px; font-size: .74rem; color: var(--muted); }
+.map-legend span { display: inline-flex; gap: 5px; align-items: center; }
+.map-dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: var(--gpu-color); }
+.gpu-nvidia { --gpu-color: #55d6be; }
+.gpu-amd { --gpu-color: #ff8c82; }
+.gpu-intel { --gpu-color: #78b7ff; }
+.gpu-other { --gpu-color: #bca4fa; }
+.target-swatch { width: 13px; border-top: 2px dashed var(--warn); }
+.perf-bars { list-style: none; padding: 0; margin: 0; display: grid; gap: 7px; max-height: 480px; overflow-y: auto; overscroll-behavior-y: contain; scrollbar-gutter: stable; }
+.perf-bars li { min-width: 0; }
+.perf-bar { width: 100%; min-width: 0; text-align: left; border: 1px solid var(--line); background: var(--panel); color: var(--text); padding: 11px 12px; border-radius: 10px; font-weight: 500; }
+.perf-bar.selected { border-color: var(--accent2); background: var(--panel2); }
+.perf-bar:focus-visible, .map-tabs button:focus-visible { outline: 3px solid var(--accent2); outline-offset: 2px; }
+.bar-head, .bar-foot { display: flex; justify-content: space-between; align-items: start; gap: 10px; }
+.bar-head strong { font-size: .85rem; overflow-wrap: anywhere; }
+.bar-number { white-space: nowrap; color: var(--gpu-color); font-size: .85rem; font-weight: 800; font-variant-numeric: tabular-nums; }
+.bar-track { height: 8px; position: relative; border-radius: 4px; background: var(--line); margin: 8px 0 7px; }
+.bar-fill { display: block; height: 100%; width: var(--bar-width); background: var(--gpu-color); border-radius: inherit; }
+.bar-target { position: absolute; top: -3px; bottom: -3px; width: 0; border-left: 2px dashed var(--warn); left: var(--target-position); }
+.bar-foot { color: var(--muted); font-size: .72rem; }
+.bar-foot b { color: var(--text); font-size: .77rem; font-variant-numeric: tabular-nums; }
+.map-detail { margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--line); }
+.map-detail h3 { margin: 0 0 8px; font-size: 1rem; }
+.map-detail .stats { margin: 0 0 10px; }
+.map-detail .stat strong { font-size: .92rem; }
+.map-detail p { margin: 7px 0; }
+.map-detail-actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.map-detail-actions a { color: var(--accent2); padding: 10px 6px; font-size: .8rem; }
+.map-detail-actions button { font-size: .8rem; min-height: 42px; }
+.map-reference { margin-top: 12px; }
+.scatter-stage { width: 100%; overflow: hidden; border: 1px solid var(--line); border-radius: 12px; background: var(--bg); }
+.scatter-svg { width: 100%; display: block; height: auto; }
+.scatter-svg text { font-family: system-ui, sans-serif; fill: var(--muted); font-size: 13px; }
+.scatter-svg .plot-grid { stroke: var(--line); stroke-width: 1; }
+.scatter-svg .plot-target { stroke: var(--warn); stroke-width: 1.6; stroke-dasharray: 5 5; }
+.scatter-svg .plot-label { fill: var(--text); font-weight: 750; font-size: 14px; }
+.scatter-svg .plot-hit { cursor: pointer; outline: none; }
+.scatter-svg .plot-hit:focus .point-halo { stroke: var(--text); stroke-width: 3; }
+.scatter-pick { margin-top: 10px; }
+.score-panel summary { cursor: pointer; font-size: .9rem; font-weight: 750; }
+.score-panel label { margin: 12px 0; }
+.score-bars { max-height: 460px; }
+.score-card { cursor: default; }
+.score-name { display: flex; align-items: start; gap: 8px; }
+.score-rank { color: var(--muted); font-size: .7rem; min-width: 25px; }
+.market-row { scroll-margin-top: 12px; }
+@media(min-width: 640px) { .map-controls { grid-template-columns: 1.4fr 1fr; } .map-detail .stats { grid-template-columns: repeat(4, 1fr); } }
+@media(prefers-color-scheme: light) { .map-chip { color: #126555; } .gpu-nvidia { --gpu-color: #157c67; } .gpu-amd { --gpu-color: #c23d38; } .gpu-intel { --gpu-color: #196cbd; } .gpu-other { --gpu-color: #7550c0; } .map-detail-actions a { color: #165f9d; } }
+
 </style>
 </head>
 <body><main>
 <header class="hero">
   <div class="eyebrow">Comparador de GPUs</div>
-  <h1>Preço e desempenho em uma lista</h1>
-  <p>Veja as cotações à vista do catálogo e compare o custo por FPS na resolução que você joga.</p>
+  <h1>Qual placa vale o preço?</h1>
+  <p>Veja o mapa de desempenho, compare as cotações e calcule o custo por FPS na resolução que você joga.</p>
   <div id="autoStatus" class="meta" role="status">Carregando a última consulta…</div>
 </header>
 
@@ -76,14 +136,50 @@
   </div>
 </section>
 
+<section id="performanceMap" class="panel map-panel" aria-labelledby="mapTitle">
+  <div class="map-heading">
+    <div><h2 id="mapTitle">Mapa das placas</h2><p class="meta">Compare o desempenho e o preço antes de escolher.</p></div>
+    <span class="map-chip" id="mapResolution">4K nativo</span>
+  </div>
+  <div class="map-tabs" role="group" aria-label="Tipo de gráfico">
+    <button type="button" id="viewBars" aria-pressed="true" aria-controls="barsView">Por desempenho</button>
+    <button type="button" id="viewScatter" aria-pressed="false" aria-controls="scatterView">Preço × FPS</button>
+  </div>
+  <div class="map-controls">
+    <label>Buscar placa no mapa e na lista<input id="catalogSearch" type="search" placeholder="Ex.: 9060, 3060 Ti ou 16 GB" autocomplete="off"></label>
+    <label>Preços do mapa<select id="chartSource"><option value="auto">Cotações automáticas</option><option value="manual">Minhas ofertas manuais</option></select></label>
+  </div>
+  <p id="chartSummary" class="meta map-summary" aria-live="polite"></p>
+  <div class="map-legend" aria-label="Legenda do gráfico">
+    <span><i class="map-dot gpu-nvidia"></i>NVIDIA</span><span><i class="map-dot gpu-amd"></i>AMD</span><span><i class="map-dot gpu-intel"></i>Intel</span><span><i class="target-swatch"></i>Meta de FPS</span>
+  </div>
+  <div id="barsView">
+    <p class="meta">Maior barra = mais FPS. Toque em uma placa para comparar.</p>
+    <ol id="performanceBars" class="perf-bars" aria-label="Placas do maior para o menor FPS"></ol>
+  </div>
+  <div id="scatterView" class="hidden">
+    <p class="meta">Mais alto = mais FPS. Mais à esquerda = menor preço.</p>
+    <div id="scatterStage" class="scatter-stage"></div>
+    <label class="scatter-pick">Selecionar oferta no mapa<select id="plotPick"></select></label>
+    <p id="scatterNote" class="meta"></p>
+  </div>
+  <div id="chartDetail" class="map-detail" aria-live="polite"></div>
+  <label class="map-reference">Comparar FPS com<select id="compareModel"></select></label>
+</section>
+
+<details class="panel score-panel">
+  <summary>Índice da lista enviada · 200 placas</summary>
+  <p class="meta">Pontuação relativa da lista enviada, na escala original de 0 a 100. A origem e a metodologia não foram informadas. Esta lista inclui GPUs de desktop, de notebook, profissionais e integradas; os pontos são exibidos separadamente dos FPS em jogos.</p>
+  <label>Buscar na lista de 200 placas<input id="scoreSearch" type="search" placeholder="Ex.: RX 9060 XT, RTX 3060 Ti" autocomplete="off"></label>
+  <p id="scoreCount" class="meta" aria-live="polite"></p>
+  <ol id="scoreBars" class="perf-bars score-bars" aria-label="Lista enviada em ordem de pontuação"></ol>
+</details>
+
 <section aria-labelledby="catalogTitle">
   <div class="section-head">
     <h2 id="catalogTitle">Todas as placas</h2>
     <span id="modelCount" class="count"></span>
   </div>
-  <label class="catalog-filter">Buscar modelo ou VRAM
-    <input id="catalogSearch" type="search" placeholder="Ex.: RX 9060 XT 16 GB" autocomplete="off">
-  </label>
   <p id="marketNote" class="meta" aria-live="polite"></p>
   <ul id="marketList" class="market-list" aria-label="Catálogo e preços das placas de vídeo"></ul>
 </section>
@@ -187,7 +283,7 @@
     const cost = quote ? money.format(card.cost) : "—";
     const link = quote ? '<a href="' + escape(quote.url) +
       '" target="_blank" rel="noopener noreferrer">Ver na fonte</a>' : "";
-    return '<li class="market-row' + (best ? " best" : "") + '">' +
+    return '<li id="gpu-' + normalize(card.modelo) + '" class="market-row' + (best ? " best" : "") + '">' +
       '<div class="market-name"><h3>' + escape(card.modelo) + '</h3>' +
       '<p class="meta">' + escape(status) + '</p>' + badge + '</div>' +
       '<dl class="market-values">' + stat("Preço à vista", price) +
@@ -237,9 +333,222 @@
     }).join("") : '<div class="empty">Adicione uma oferta para comparar.</div>';
   }
 
+  // A lista enviada usa outra escala. Seus pontos nunca entram no cálculo de FPS.
+  const sentScores = [{"posicao":1,"modelo":"NVIDIA GeForce RTX 5090 D","indice":100},{"posicao":2,"modelo":"NVIDIA GeForce RTX 5090","indice":93.01},{"posicao":3,"modelo":"NVIDIA GeForce RTX 4090","indice":90.69},{"posicao":4,"modelo":"NVIDIA RTX PRO 6000 Blackwell Workstation","indice":89.62},{"posicao":5,"modelo":"NVIDIA GeForce RTX 5080","indice":85.05},{"posicao":6,"modelo":"NVIDIA GeForce RTX 5090 D V2","indice":84.06},{"posicao":7,"modelo":"NVIDIA GeForce RTX 4080","indice":82.16},{"posicao":8,"modelo":"NVIDIA GeForce RTX 4080 SUPER","indice":81.6},{"posicao":9,"modelo":"NVIDIA RTX PRO 4500 Blackwell","indice":79.63},{"posicao":10,"modelo":"NVIDIA RTX PRO 5000 Blackwell","indice":77.29},{"posicao":11,"modelo":"NVIDIA GeForce RTX 5070 Ti","indice":77.13},{"posicao":12,"modelo":"NVIDIA GeForce RTX 4070 Ti SUPER","indice":75.97},{"posicao":13,"modelo":"NVIDIA GeForce RTX 4070 Ti","indice":75.16},{"posicao":14,"modelo":"AMD Radeon RX 7900 XTX","indice":75.08},{"posicao":15,"modelo":"NVIDIA RTX 5000 Ada Generation","indice":74.16},{"posicao":16,"modelo":"NVIDIA GeForce RTX 4090 D","indice":72.9},{"posicao":17,"modelo":"NVIDIA GeForce RTX 4070 SUPER","indice":71.42},{"posicao":18,"modelo":"NVIDIA GeForce RTX 3090 Ti","indice":69.63},{"posicao":19,"modelo":"AMD Radeon RX 7900 XT","indice":69.49},{"posicao":20,"modelo":"NVIDIA GeForce RTX 5070","indice":68.42},{"posicao":21,"modelo":"NVIDIA RTX 6000 Ada Generation","indice":68.02},{"posicao":22,"modelo":"NVIDIA GeForce RTX 5090 Mobile","indice":67.81},{"posicao":23,"modelo":"AMD Radeon RX 6950 XT","indice":66.96},{"posicao":24,"modelo":"NVIDIA RTX 4500 Ada Generation","indice":66.6},{"posicao":25,"modelo":"AMD Radeon PRO W7900","indice":66.05},{"posicao":26,"modelo":"NVIDIA RTX PRO 5000 72 GB Blackwell","indice":65.61},{"posicao":27,"modelo":"AMD Radeon AI PRO R9700","indice":65.61},{"posicao":28,"modelo":"AMD Radeon RX 7900 GRE","indice":65.53},{"posicao":29,"modelo":"NVIDIA RTX PRO 4000 Blackwell","indice":65.24},{"posicao":30,"modelo":"AMD Radeon PRO W7800","indice":64.61},{"posicao":31,"modelo":"NVIDIA GeForce RTX 4090 Mobile","indice":64.49},{"posicao":32,"modelo":"AMD Radeon RX 9070 XT","indice":64.23},{"posicao":33,"modelo":"NVIDIA GeForce RTX 4070","indice":64.05},{"posicao":34,"modelo":"NVIDIA GeForce RTX 3080 Ti","indice":63.74},{"posicao":35,"modelo":"AMD Radeon RX 6900","indice":63.54},{"posicao":36,"modelo":"AMD Radeon RX 6900 XT","indice":63.54},{"posicao":37,"modelo":"NVIDIA GeForce RTX 3080 12 GB","indice":63.34},{"posicao":38,"modelo":"AMD Radeon Pro V620","indice":63.26},{"posicao":39,"modelo":"NVIDIA GeForce RTX 3090","indice":63.11},{"posicao":40,"modelo":"NVIDIA GeForce RTX 5080 Mobile","indice":62.79},{"posicao":41,"modelo":"NVIDIA RTX PRO 6000 Blackwell Server","indice":61.04},{"posicao":42,"modelo":"AMD Radeon RX 9070","indice":60.52},{"posicao":43,"modelo":"AMD Radeon RX 6800 XT","indice":59.91},{"posicao":44,"modelo":"NVIDIA RTX 5880 Ada Generation","indice":59.86},{"posicao":45,"modelo":"NVIDIA GeForce RTX 3080","indice":59.56},{"posicao":46,"modelo":"NVIDIA GeForce RTX 4080 Mobile","indice":59.01},{"posicao":47,"modelo":"AMD Radeon RX 7800 XT","indice":58.39},{"posicao":48,"modelo":"NVIDIA RTX PRO 4000 Blackwell SFF","indice":56.38},{"posicao":49,"modelo":"NVIDIA RTX 4000 Ada Generation","indice":56.34},{"posicao":50,"modelo":"AMD Radeon RX 9070 GRE","indice":55.49},{"posicao":51,"modelo":"NVIDIA GeForce RTX 3070 Ti","indice":55.24},{"posicao":52,"modelo":"NVIDIA RTX 5000 Ada Generation Mobile","indice":55.18},{"posicao":53,"modelo":"AMD Radeon PRO W7700","indice":54.45},{"posicao":54,"modelo":"NVIDIA RTX A5000","indice":54.43},{"posicao":55,"modelo":"AMD Radeon RX 7700 XT","indice":54.37},{"posicao":56,"modelo":"NVIDIA Quadro RTX A6000","indice":54},{"posicao":57,"modelo":"NVIDIA GeForce RTX 5060 Ti 16 GB","indice":53.98},{"posicao":58,"modelo":"NVIDIA GeForce RTX 4060 Ti","indice":53.9},{"posicao":59,"modelo":"NVIDIA GeForce RTX 5070 Ti Mobile","indice":53.77},{"posicao":60,"modelo":"NVIDIA GeForce RTX 4060 Ti 16 GB","indice":53.72},{"posicao":61,"modelo":"NVIDIA L40","indice":53.59},{"posicao":62,"modelo":"AMD Radeon RX 7900M","indice":53.05},{"posicao":63,"modelo":"NVIDIA GeForce RTX 3070","indice":52.62},{"posicao":64,"modelo":"AMD Radeon RX 6800","indice":52.58},{"posicao":65,"modelo":"NVIDIA GeForce RTX 5060 Ti 8 GB","indice":51.96},{"posicao":66,"modelo":"NVIDIA RTX 4000 Ada Generation Mobile","indice":51.95},{"posicao":67,"modelo":"NVIDIA GeForce RTX 2080 Ti","indice":51.04},{"posicao":68,"modelo":"NVIDIA RTX A5500","indice":50.62},{"posicao":69,"modelo":"AMD Radeon RX 6750 XT","indice":49.39},{"posicao":70,"modelo":"NVIDIA RTX A4500","indice":49.17},{"posicao":71,"modelo":"NVIDIA RTX 4000 SFF Ada Generation","indice":49.14},{"posicao":72,"modelo":"NVIDIA GeForce RTX 5060","indice":49.1},{"posicao":73,"modelo":"AMD Radeon RX 6750 GRE 12 GB","indice":48.69},{"posicao":74,"modelo":"NVIDIA RTX PRO 2000 Blackwell","indice":48.6},{"posicao":75,"modelo":"NVIDIA GeForce RTX 3060 Ti","indice":48.2},{"posicao":76,"modelo":"AMD Radeon Pro W6800","indice":48.15},{"posicao":77,"modelo":"AMD Radeon RX 9060 XT 16 GB","indice":48.04},{"posicao":78,"modelo":"NVIDIA L40S","indice":47.89},{"posicao":79,"modelo":"AMD Radeon 8065S","indice":47.38},{"posicao":80,"modelo":"AMD Radeon RX 6700 XT","indice":47.02},{"posicao":81,"modelo":"AMD Radeon RX 9060 XT 8 GB","indice":46.99},{"posicao":82,"modelo":"NVIDIA RTX 3500 Ada Generation Mobile","indice":46.81},{"posicao":83,"modelo":"NVIDIA Quadro RTX 8000","indice":46.64},{"posicao":84,"modelo":"NVIDIA GeForce RTX 4060","indice":46.46},{"posicao":85,"modelo":"NVIDIA GeForce RTX 4070 Mobile","indice":46.43},{"posicao":86,"modelo":"NVIDIA TITAN Xp","indice":46.33},{"posicao":87,"modelo":"NVIDIA GeForce RTX 2080 Super","indice":46.25},{"posicao":88,"modelo":"NVIDIA RTX A4000","indice":46.01},{"posicao":89,"modelo":"NVIDIA RTX PRO 3000 Blackwell Mobile","indice":45.81},{"posicao":90,"modelo":"NVIDIA GeForce RTX 5070 Mobile","indice":45.73},{"posicao":91,"modelo":"AMD Radeon RX 9060 XT LP","indice":45.47},{"posicao":92,"modelo":"AMD Radeon RX 6750 GRE 10 GB","indice":45.18},{"posicao":93,"modelo":"AMD Radeon RX 6750 GRE","indice":45.18},{"posicao":94,"modelo":"NVIDIA TITAN RTX","indice":44.98},{"posicao":95,"modelo":"AMD Radeon RX 6700","indice":44.96},{"posicao":96,"modelo":"NVIDIA GeForce RTX 3080 Ti Mobile","indice":44.83},{"posicao":97,"modelo":"Intel Arc Pro B70","indice":44.67},{"posicao":98,"modelo":"NVIDIA GeForce GTX 1080 Ti","indice":44.36},{"posicao":99,"modelo":"NVIDIA GeForce RTX 2080","indice":44.29},{"posicao":100,"modelo":"NVIDIA Quadro GV100","indice":44.24},{"posicao":101,"modelo":"NVIDIA GeForce RTX 2070 Super","indice":43.22},{"posicao":102,"modelo":"AMD Radeon 8060S","indice":43.01},{"posicao":103,"modelo":"AMD Radeon RX 7650 GRE","indice":42.69},{"posicao":104,"modelo":"NVIDIA Quadro RTX 6000","indice":42.33},{"posicao":105,"modelo":"AMD Radeon RX 9060","indice":42.15},{"posicao":106,"modelo":"AMD Radeon RX 7800M","indice":42},{"posicao":107,"modelo":"NVIDIA RTX PRO 4500 Blackwell Server","indice":41.93},{"posicao":108,"modelo":"NVIDIA RTX PRO 5000 Blackwell Mobile","indice":41.86},{"posicao":109,"modelo":"AMD Radeon RX 6850M XT","indice":41.67},{"posicao":110,"modelo":"AMD Radeon Pro W6900X","indice":41.54},{"posicao":111,"modelo":"AMD Radeon RX 7600 XT","indice":41.43},{"posicao":112,"modelo":"NVIDIA GeForce RTX 4060 Mobile","indice":41.29},{"posicao":113,"modelo":"NVIDIA RTX A5500 Mobile","indice":41.17},{"posicao":114,"modelo":"NVIDIA GeForce RTX 3070 Ti Mobile","indice":41.14},{"posicao":115,"modelo":"NVIDIA TITAN V","indice":40.85},{"posicao":116,"modelo":"AMD Radeon RX 6650 XT","indice":40.79},{"posicao":117,"modelo":"NVIDIA TITAN V CEO Edition","indice":40.52},{"posicao":118,"modelo":"NVIDIA RTX Spark N1X 6144-Core Blackwell GPU","indice":40.44},{"posicao":119,"modelo":"NVIDIA RTX 2000 Ada Generation","indice":40.4},{"posicao":120,"modelo":"NVIDIA GeForce RTX 3060","indice":40.26},{"posicao":121,"modelo":"NVIDIA RTX A4500 Mobile","indice":40.25},{"posicao":122,"modelo":"NVIDIA GeForce GTX 1070 SLI (móvel)","indice":40.22},{"posicao":123,"modelo":"NVIDIA GeForce RTX 5060 Mobile","indice":40.05},{"posicao":124,"modelo":"NVIDIA RTX A4000H","indice":40},{"posicao":125,"modelo":"NVIDIA GeForce RTX 5050","indice":39.87},{"posicao":126,"modelo":"AMD Radeon Pro W6800X","indice":39.64},{"posicao":127,"modelo":"AMD Radeon RX 5700 XT 50th Anniversary","indice":39.49},{"posicao":128,"modelo":"AMD Radeon 8050S","indice":39.36},{"posicao":129,"modelo":"AMD Radeon PRO W7600","indice":39.29},{"posicao":130,"modelo":"AMD Radeon RX 8060S","indice":39.26},{"posicao":131,"modelo":"NVIDIA GeForce RTX 2060 Super","indice":39.24},{"posicao":132,"modelo":"AMD Radeon RX 6600 XT","indice":39.24},{"posicao":133,"modelo":"AMD Radeon RX 7600","indice":39.19},{"posicao":134,"modelo":"NVIDIA RTX A5000 Mobile","indice":39.18},{"posicao":135,"modelo":"NVIDIA RTX PRO 2000 Blackwell Embedded","indice":38.74},{"posicao":136,"modelo":"AMD Radeon VII","indice":38.57},{"posicao":137,"modelo":"Intel Arc B580","indice":38.42},{"posicao":138,"modelo":"AMD Radeon RX 6650M XT","indice":38.36},{"posicao":139,"modelo":"NVIDIA GeForce RTX 2070","indice":38.29},{"posicao":140,"modelo":"NVIDIA RTX 3000 Ada Generation Mobile","indice":38.27},{"posicao":141,"modelo":"NVIDIA GeForce RTX 3080 Mobile","indice":38.21},{"posicao":142,"modelo":"AMD Radeon RX 5700 XT","indice":38.21},{"posicao":143,"modelo":"NVIDIA GeForce RTX 2060 12 GB","indice":37.96},{"posicao":144,"modelo":"AMD Radeon RX 7600S","indice":37.28},{"posicao":145,"modelo":"AMD Radeon Pro Vega II","indice":37.26},{"posicao":146,"modelo":"NVIDIA GeForce GTX 1080","indice":37.23},{"posicao":147,"modelo":"AMD Radeon RX 6800S","indice":37.21},{"posicao":148,"modelo":"AMD Radeon RX 7700S","indice":36.94},{"posicao":149,"modelo":"NVIDIA GeForce GTX 1070 SLI","indice":36.84},{"posicao":150,"modelo":"NVIDIA Quadro P6000","indice":36.76},{"posicao":151,"modelo":"NVIDIA RTX Spark N1X 5120-Core Blackwell GPU","indice":36.62},{"posicao":152,"modelo":"AMD Radeon RX 6650M","indice":36.35},{"posicao":153,"modelo":"NVIDIA GeForce RTX 3060 8 GB","indice":36.3},{"posicao":154,"modelo":"NVIDIA Quadro RTX 5000","indice":36.3},{"posicao":155,"modelo":"AMD Radeon Pro W5700X","indice":36.21},{"posicao":156,"modelo":"NVIDIA GeForce RTX 2080 Super Mobile","indice":36.17},{"posicao":157,"modelo":"NVIDIA GeForce GTX 980 SLI (móvel)","indice":36.12},{"posicao":158,"modelo":"NVIDIA GeForce RTX 2080 (móvel)","indice":35.96},{"posicao":159,"modelo":"NVIDIA RTX PRO 2000 Blackwell Mobile","indice":35.89},{"posicao":160,"modelo":"AMD Radeon RX 6600","indice":35.86},{"posicao":161,"modelo":"AMD Radeon Pro W6600","indice":35.73},{"posicao":162,"modelo":"AMD Radeon Instinct MI60","indice":35.6},{"posicao":163,"modelo":"AMD Radeon RX 6700S","indice":35.55},{"posicao":164,"modelo":"AMD Radeon RX 7600M XT","indice":35.41},{"posicao":165,"modelo":"NVIDIA Quadro RTX 4000","indice":35.4},{"posicao":166,"modelo":"AMD Radeon RX 8050S","indice":35.36},{"posicao":167,"modelo":"NVIDIA RTX 2000 Ada Generation Mobile","indice":35.3},{"posicao":168,"modelo":"AMD Radeon Pro W6800X Duo","indice":35.17},{"posicao":169,"modelo":"NVIDIA GeForce GTX 1070 Ti","indice":35.03},{"posicao":170,"modelo":"NVIDIA GeForce GTX 1080 SLI (móvel)","indice":34.79},{"posicao":171,"modelo":"Intel Arc Pro B60","indice":34.79},{"posicao":172,"modelo":"NVIDIA RTX A4000 Mobile","indice":34.62},{"posicao":173,"modelo":"NVIDIA GeForce RTX 3070 Mobile","indice":34.26},{"posicao":174,"modelo":"NVIDIA GeForce RTX 4050 Mobile","indice":33.86},{"posicao":175,"modelo":"AMD Radeon RX 5700","indice":33.85},{"posicao":176,"modelo":"Intel Arc B570","indice":33.82},{"posicao":177,"modelo":"AMD Radeon Pro W5700","indice":33.71},{"posicao":178,"modelo":"NVIDIA Quadro GP100","indice":33.63},{"posicao":179,"modelo":"NVIDIA GeForce RTX 2060","indice":33.56},{"posicao":180,"modelo":"NVIDIA GeForce RTX 5050 Mobile","indice":33.26},{"posicao":181,"modelo":"NVIDIA GeForce RTX 2080 Max-Q","indice":33.14},{"posicao":182,"modelo":"AMD Radeon RX 6600 LE","indice":33.06},{"posicao":183,"modelo":"AMD Radeon RX Vega 64","indice":32.99},{"posicao":184,"modelo":"NVIDIA GeForce RTX 2070 Super Mobile","indice":32.85},{"posicao":185,"modelo":"AMD Radeon RX 6600M","indice":32.84},{"posicao":186,"modelo":"AMD Radeon Pro Vega II Duo","indice":32.66},{"posicao":187,"modelo":"AMD Radeon RX 6700M","indice":32.58},{"posicao":188,"modelo":"NVIDIA RTX A2000 12 GB","indice":32.49},{"posicao":189,"modelo":"NVIDIA GeForce GTX 980 Ti","indice":32.46},{"posicao":190,"modelo":"NVIDIA Quadro RTX 5000 (móvel)","indice":32.44},{"posicao":191,"modelo":"NVIDIA A10G","indice":32.44},{"posicao":192,"modelo":"AMD Radeon Pro VII","indice":32.41},{"posicao":193,"modelo":"AMD Radeon RX 6600S","indice":32.37},{"posicao":194,"modelo":"NVIDIA GeForce GTX 1080 (móvel)","indice":32.32},{"posicao":195,"modelo":"NVIDIA GeForce GTX 1070","indice":32.23},{"posicao":196,"modelo":"NVIDIA L20","indice":32.03},{"posicao":197,"modelo":"NVIDIA GeForce RTX 2080 Super Max-Q","indice":32.01},{"posicao":198,"modelo":"NVIDIA RTX A2000","indice":31.96},{"posicao":199,"modelo":"Intel Arc A770","indice":31.91},{"posicao":200,"modelo":"AMD Radeon RX 5600 XT","indice":31.91}];
+  const compactNumber = new Intl.NumberFormat("pt-BR", { maximumFractionDigits: 1 });
+  const scoreNumber = new Intl.NumberFormat("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  let mapView = "bars";
+  let selectedMapModel = normalize("RX 9060 XT 16 GB");
+  let selectedMapOffer = "";
+
+  function gpuClass(model) {
+    if (/\b(?:RTX|GTX|NVIDIA|Quadro|TITAN|GeForce)\b/i.test(model)) return "gpu-nvidia";
+    if (/\b(?:RX|Radeon|AMD)\b/i.test(model)) return "gpu-amd";
+    if (/\b(?:Arc|Intel)\b/i.test(model)) return "gpu-intel";
+    return "gpu-other";
+  }
+
+  function mapData() {
+    const { resolution, budget } = filters();
+    const search = normalize(byId("catalogSearch").value);
+    const useManual = byId("chartSource").value === "manual";
+    const entries = catalog.filter((card) => normalize(card.modelo).includes(search)).map((card) => {
+      const key = normalize(card.modelo);
+      const source = useManual ? manual.filter((item) => normalize(item.model) === key).map((item) => ({
+        id: "manual-" + item.id, preco: item.price, loja: "Oferta manual", url: ""
+      })) : quotes.has(key) ? [{ ...quotes.get(key), id: "auto-" + key }] : [];
+      const offers = source.map((offer) => ({
+        ...offer, key, modelo: card.modelo, fps: card.fps[resolution],
+        cost: offer.preco / card.fps[resolution]
+      })).sort((a, b) => a.preco - b.preco);
+      return { key, modelo: card.modelo, fps: card.fps[resolution], vram: card.vram, offers };
+    }).sort((a, b) => b.fps - a.fps || a.modelo.localeCompare(b.modelo, "pt-BR"));
+    const allPoints = entries.flatMap((card) => card.offers);
+    // O teto limita a área do mapa de preços, mantendo a escala útil no celular.
+    const points = allPoints.filter((offer) => offer.preco <= budget);
+    return { entries, points, allPoints, useManual };
+  }
+
+  function niceStep(maximum, count = 4) {
+    const raw = Math.max(maximum, 1) / count;
+    const power = 10 ** Math.floor(Math.log10(raw));
+    const fraction = raw / power;
+    return (fraction <= 1 ? 1 : fraction <= 2 ? 2 : fraction <= 2.5 ? 2.5 : fraction <= 5 ? 5 : 10) * power;
+  }
+
+  function plotGeometry(points, target) {
+    const priceStep = niceStep(Math.max(1, ...points.map((point) => point.preco)));
+    const fpsStep = niceStep(Math.max(target, 1, ...points.map((point) => point.fps)));
+    const xMax = Math.ceil(Math.max(1, ...points.map((point) => point.preco)) / priceStep) * priceStep;
+    const yMax = Math.ceil(Math.max(target, 1, ...points.map((point) => point.fps)) / fpsStep) * fpsStep;
+    return { priceStep, fpsStep, xMax, yMax, x: (price) => 58 + price / xMax * 512, y: (fps) => 292 - fps / yMax * 238 };
+  }
+
+  function renderScatter(points, chosen, target) {
+    const stage = byId("scatterStage");
+    if (!points.length) {
+      stage.innerHTML = '<p class="empty">Nenhuma oferta com preço nos filtros atuais.</p>';
+      byId("plotPick").replaceChildren();
+      byId("plotPick").disabled = true;
+      return;
+    }
+    const { priceStep, fpsStep, xMax, yMax, x, y } = plotGeometry(points, target);
+    let grid = "";
+    for (let value = 0; value <= xMax; value += priceStep) {
+      const label = value >= 1000 ? compactNumber.format(value / 1000) + " mil" : compactNumber.format(value);
+      grid += '<line class="plot-grid" x1="' + x(value) + '" y1="54" x2="' + x(value) + '" y2="292"/>' +
+        '<text text-anchor="middle" x="' + x(value) + '" y="313">' + escape(label) + '</text>';
+    }
+    for (let value = 0; value <= yMax; value += fpsStep) {
+      grid += '<line class="plot-grid" x1="58" y1="' + y(value) + '" x2="570" y2="' + y(value) + '"/>' +
+        '<text text-anchor="end" x="48" y="' + (y(value) + 4) + '">' + escape(compactNumber.format(value)) + '</text>';
+    }
+    const dots = [...points].sort((a, b) => Number(a.id === chosen?.id) - Number(b.id === chosen?.id)).map((point) => {
+      const selected = point.id === chosen?.id;
+      const label = point.modelo + ", " + money.format(point.preco) + ", " + fpsNumber.format(point.fps) + " FPS nativos";
+      return '<g class="plot-hit ' + gpuClass(point.modelo) + '" role="button" tabindex="0" data-map-offer="' + escape(point.id) + '" aria-label="' + escape(label) + '" aria-pressed="' + selected + '">' +
+        '<title>' + escape(label + " · " + money.format(point.cost) + "/FPS") + '</title>' +
+        '<circle class="point-halo" cx="' + x(point.preco) + '" cy="' + y(point.fps) + '" r="15" fill="transparent"' + (selected ? ' stroke="var(--text)" stroke-width="2"' : '') + '/>' +
+        '<circle cx="' + x(point.preco) + '" cy="' + y(point.fps) + '" r="' + (selected ? 7 : 5.5) + '" fill="var(--gpu-color)" opacity="' + (selected ? 1 : .78) + '"/></g>';
+    }).join("");
+    stage.innerHTML = '<svg class="scatter-svg" viewBox="0 0 600 354" role="group" aria-label="Mapa de preço em reais e FPS nativos">' +
+      '<text class="plot-label" x="16" y="23">FPS nativos ↑</text><text x="16" y="42">Maior desempenho</text>' + grid +
+      '<line class="plot-target" x1="58" y1="' + y(target) + '" x2="570" y2="' + y(target) + '"/>' +
+      '<text x="566" y="' + Math.max(18, y(target) - 8) + '" text-anchor="end">Meta: ' + escape(compactNumber.format(target)) + ' FPS</text>' +
+      dots + '<text class="plot-label" x="570" y="341" text-anchor="end">Preço à vista (R$) →</text></svg>';
+    byId("plotPick").disabled = false;
+    byId("plotPick").innerHTML = points.map((point) => '<option value="' + escape(point.id) + '"' + (point.id === chosen?.id ? " selected" : "") + '>' +
+      escape(point.modelo + " · " + money.format(point.preco)) + '</option>').join("");
+  }
+
+  function renderMap() {
+    const { resolution, target, budget } = filters();
+    const { entries, points, allPoints, useManual } = mapData();
+    const resolutionLabel = resolution === "4k" ? "4K" : resolution;
+    byId("mapResolution").textContent = resolutionLabel + " nativo";
+    byId("chartSummary").textContent = entries.length + " modelos · " + entries.filter((card) => card.offers.length).length +
+      " com preço · meta de " + compactNumber.format(target) + " FPS · " + (useManual ? "preços cadastrados por você" : "cotações automáticas");
+    byId("barsView").classList.toggle("hidden", mapView !== "bars");
+    byId("scatterView").classList.toggle("hidden", mapView !== "scatter");
+    byId("viewBars").setAttribute("aria-pressed", String(mapView === "bars"));
+    byId("viewScatter").setAttribute("aria-pressed", String(mapView === "scatter"));
+
+    let chosen = allPoints.find((point) => point.id === selectedMapOffer && point.key === selectedMapModel);
+    let selected = entries.find((card) => card.key === selectedMapModel) || entries[0];
+    if (mapView === "scatter" && !points.some((point) => point.key === selected?.key)) {
+      const best = [...points].sort((a, b) => a.cost - b.cost).find((point) => point.fps >= target) ||
+        [...points].sort((a, b) => a.cost - b.cost)[0];
+      selected = entries.find((card) => card.key === best?.key) || selected;
+    }
+    if (!chosen || chosen.key !== selected?.key || (mapView === "scatter" && chosen.preco > budget)) {
+      chosen = (mapView === "scatter" ? points : allPoints).find((point) => point.key === selected?.key);
+    }
+    if (selected) selectedMapModel = selected.key;
+    selectedMapOffer = chosen?.id || "";
+
+    const maxFps = Math.max(1, ...entries.map((card) => card.fps));
+    byId("performanceBars").innerHTML = entries.length ? entries.map((card) => {
+      const quote = card.offers[0];
+      const price = quote ? money.format(quote.preco) : "Sem preço";
+      const condition = card.fps >= target ? "Atende à meta" : "Abaixo da meta";
+      const priceCondition = quote && quote.preco > budget ? " · Acima do teto" : "";
+      return '<li><button class="perf-bar ' + gpuClass(card.modelo) + (card.key === selectedMapModel ? ' selected' : '') +
+        '" type="button" data-map-model="' + escape(card.key) + '" aria-pressed="' + (card.key === selectedMapModel) + '">' +
+        '<span class="bar-head"><strong>' + escape(card.modelo) + '</strong><span class="bar-number">' + fpsNumber.format(card.fps) + ' FPS</span></span>' +
+        '<span class="bar-track" style="display:block;--bar-width:' + (card.fps / maxFps * 100).toFixed(3) + '%;--target-position:' + (target / maxFps * 100).toFixed(3) + '%"><span class="bar-fill"></span>' +
+        (target <= maxFps ? '<span class="bar-target"></span>' : '') + '</span>' +
+        '<span class="bar-foot"><span>' + escape(condition + priceCondition) + '</span><b>' + escape(price) + '</b></span></button></li>';
+    }).join("") : '<li class="empty">Nenhum modelo encontrado.</li>';
+
+    const excluded = allPoints.length - points.length;
+    byId("scatterNote").textContent = points.length + " ofertas no mapa. " + (excluded ? excluded + " acima do teto foram ocultadas do mapa. " : "") +
+      "Placas sem preço continuam no gráfico por desempenho. Use o teto para aproximar a faixa de preços.";
+    renderScatter(points, chosen, target);
+    if (!selected) {
+      byId("chartDetail").innerHTML = '<p class="meta">Ajuste a busca para comparar uma placa.</p>';
+      return;
+    }
+    const reference = models.get(byId("compareModel").value);
+    const referenceFps = reference?.fps[resolution];
+    const relative = referenceFps ? (selected.fps / referenceFps - 1) * 100 : null;
+    const comparison = relative === null ? "Selecione uma referência abaixo." : selected.key === normalize(reference.modelo)
+      ? "Mesmo modelo da referência selecionada."
+      : compactNumber.format(Math.abs(relative)) + "% " + (relative >= 0 ? "mais" : "menos") + " FPS que a " + reference.modelo + " em " + resolutionLabel + ".";
+    const cost = chosen ? money.format(chosen.cost) + "/FPS" : "Sem preço";
+    const source = chosen ? chosen.loja + (useManual ? "" : " · menor cotação disponível na fonte") : "Adicione um preço para calcular o custo por FPS.";
+    const quoteLink = chosen?.url ? '<a href="' + escape(chosen.url) + '" target="_blank" rel="noopener noreferrer">Ver oferta na fonte ↗</a>' : "";
+    byId("chartDetail").innerHTML = '<h3>' + escape(selected.modelo) + '</h3><div class="stats">' +
+      '<div class="stat"><small>FPS nativos · ' + resolutionLabel + '</small><strong>' + fpsNumber.format(selected.fps) + '</strong></div>' +
+      '<div class="stat"><small>Preço à vista</small><strong>' + (chosen ? money.format(chosen.preco) : "—") + '</strong></div>' +
+      '<div class="stat"><small>Custo por FPS</small><strong>' + escape(cost) + '</strong></div>' +
+      '<div class="stat"><small>Meta de ' + compactNumber.format(target) + ' FPS</small><strong>' + (selected.fps >= target ? "Atende à meta" : "Abaixo da meta") + '</strong></div></div>' +
+      '<p class="meta">' + escape(comparison) + '</p><p class="meta">' + escape(source) + '</p>' +
+      '<div class="map-detail-actions"><button type="button" class="secondary" id="useMapModel">Inserir meu preço</button>' +
+      '<a href="#gpu-' + selected.key + '">Ver na lista</a>' + quoteLink + '</div>';
+  }
+
+  function renderSentScores() {
+    const search = normalize(byId("scoreSearch").value);
+    const rows = sentScores.filter((card) => normalize(card.modelo).includes(search));
+    byId("scoreCount").textContent = rows.length + " de " + sentScores.length + " placas · pontos da lista enviada";
+    byId("scoreBars").innerHTML = rows.map((card) =>
+      '<li><div class="perf-bar score-card ' + gpuClass(card.modelo) + '"><div class="bar-head"><span class="score-name"><span class="score-rank">#' + card.posicao +
+      '</span><strong>' + escape(card.modelo) + '</strong></span><span class="bar-number">' + scoreNumber.format(card.indice) + ' pts</span></div>' +
+      '<div class="bar-track" style="--bar-width:' + card.indice + '%"><span class="bar-fill"></span></div></div></li>'
+    ).join("") || '<li class="empty">Nenhuma placa encontrada na lista enviada.</li>';
+  }
+
+  function mapEvents() {
+    for (const [id, view] of [["viewBars", "bars"], ["viewScatter", "scatter"]]) {
+      byId(id).addEventListener("click", () => { mapView = view; renderMap(); });
+    }
+    byId("chartSource").addEventListener("change", () => { selectedMapOffer = ""; renderMap(); });
+    byId("compareModel").addEventListener("change", renderMap);
+    byId("performanceBars").addEventListener("click", (event) => {
+      const button = event.target.closest("[data-map-model]");
+      if (!button) return;
+      selectedMapModel = button.dataset.mapModel;
+      selectedMapOffer = "";
+      const scrollTop = byId("performanceBars").scrollTop;
+      renderMap();
+      byId("performanceBars").scrollTop = scrollTop;
+      byId("chartDetail").scrollIntoView({ behavior: "smooth", block: "nearest" });
+    });
+    const selectOffer = (id) => {
+      const point = mapData().allPoints.find((offer) => offer.id === id);
+      if (!point) return;
+      selectedMapModel = point.key;
+      selectedMapOffer = point.id;
+      renderMap();
+    };
+    byId("plotPick").addEventListener("change", (event) => selectOffer(event.target.value));
+    byId("scatterStage").addEventListener("click", (event) => {
+      const point = event.target.closest("[data-map-offer]");
+      if (point) selectOffer(point.dataset.mapOffer);
+    });
+    byId("scatterStage").addEventListener("keydown", (event) => {
+      if (event.key !== "Enter" && event.key !== " ") return;
+      const point = event.target.closest("[data-map-offer]");
+      if (point) { event.preventDefault(); selectOffer(point.dataset.mapOffer); }
+    });
+    byId("chartDetail").addEventListener("click", (event) => {
+      if (!event.target.closest("#useMapModel")) return;
+      const card = models.get(selectedMapModel);
+      if (!card) return;
+      resetForm();
+      byId("model").value = card.modelo;
+      document.querySelector("details.manual").open = true;
+      byId("price").focus();
+    });
+    byId("scoreSearch").addEventListener("input", renderSentScores);
+    renderSentScores();
+  }
+
+
   function refresh() {
     renderMarket();
     renderManual();
+    renderMap();
   }
 
   function resetForm() {
@@ -305,6 +614,9 @@
       card && typeof card.modelo === "string" && ["4k", "1440p", "1080p"].every((res) => positive(card.fps?.[res]))
     );
     models = new Map(catalog.map((card) => [normalize(card.modelo), card]));
+    byId("compareModel").innerHTML = [...catalog].sort((a, b) => a.modelo.localeCompare(b.modelo, "pt-BR")).map((card) =>
+      '<option value="' + normalize(card.modelo) + '"' + (card.modelo === "RTX 3060 Ti 8 GB" ? " selected" : "") + '>' + escape(card.modelo) + '</option>'
+    ).join("");
     byId("models").replaceChildren(...catalog.map((card) => {
       const option = document.createElement("option");
       option.value = card.modelo;
@@ -339,9 +651,11 @@
     refresh();
   }
 
+  mapEvents();
   refresh();
   load();
 })();
 </script>
 </body>
 </html>
+
