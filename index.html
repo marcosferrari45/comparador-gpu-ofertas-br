@@ -112,7 +112,8 @@
 .score-rank { color: var(--muted); font-size: .7rem; min-width: 25px; }
 .market-row { scroll-margin-top: 12px; }
 @media(min-width: 640px) { .map-controls { grid-template-columns: 1.4fr 1fr; } .map-detail .stats { grid-template-columns: repeat(4, 1fr); } }
-@media(prefers-color-scheme: light) { .map-chip { color: #126555; } .gpu-nvidia { --gpu-color: #157c67; } .gpu-amd { --gpu-color: #c23d38; } .gpu-intel { --gpu-color: #196cbd; } .gpu-other { --gpu-color: #7550c0; } .map-detail-actions a { color: #165f9d; } }
+@media(max-width: 639px) { .scatter-svg text, .scatter-svg .plot-label { font-size: 20px; } }
+@media(prefers-color-scheme: light) { :root { --warn: #966000; } label { color: #35475e; } .hero .eyebrow, .map-chip { color: #126555; } .gpu-nvidia { --gpu-color: #157c67; } .gpu-amd { --gpu-color: #c23d38; } .gpu-intel { --gpu-color: #196cbd; } .gpu-other { --gpu-color: #7550c0; } .map-detail-actions a { color: #165f9d; } }
 
 </style>
 </head>
