@@ -1,5 +1,5 @@
 {
-  "atualizado_em": "2026-11-18T11:17:41+00:00",
+  "atualizado_em": "2026-11-19T11:17:41+00:00",
   "modelos_total": 48,
   "ofertas": [
     {
@@ -9,16 +9,16 @@
       "moeda": "BRL",
       "loja": "KaBuM! · RadarGPU",
       "url": "https://radargpu.com.br/gpu/rtx-5090/",
-      "fonte_em": "18/11 às 4h"
+      "fonte_em": "19/11 às 4h"
     },
     {
       "id": "radargpu-placas-rtx508016gb",
       "modelo": "RTX 5080 16 GB",
-      "preco": 11838.9,
+      "preco": 10694.64,
       "moeda": "BRL",
       "loja": "KaBuM! · RadarGPU",
       "url": "https://radargpu.com.br/gpu/rtx-5080/",
-      "fonte_em": "18/11 às 4h"
+      "fonte_em": "19/11 às 4h"
     },
     {
       "id": "radargpu-placas-rtx5070ti16gb",
@@ -27,7 +27,7 @@
       "moeda": "BRL",
       "loja": "KaBuM! · RadarGPU",
       "url": "https://radargpu.com.br/gpu/rtx-5070-ti/",
-      "fonte_em": "18/11 às 4h"
+      "fonte_em": "19/11 às 4h"
     },
     {
       "id": "radargpu-placas-rtx507012gb",
@@ -36,7 +36,7 @@
       "moeda": "BRL",
       "loja": "KaBuM! · RadarGPU",
       "url": "https://radargpu.com.br/gpu/rtx-5070/",
-      "fonte_em": "18/11 às 4h"
+      "fonte_em": "19/11 às 4h"
     },
     {
       "id": "radargpu-placas-rtx5060ti16gb",
@@ -45,7 +45,7 @@
       "moeda": "BRL",
       "loja": "Bemol · RadarGPU",
       "url": "https://radargpu.com.br/gpu/rtx-5060-ti/",
-      "fonte_em": "18/11 às 4h"
+      "fonte_em": "19/11 às 4h"
     },
     {
       "id": "radargpu-placas-rtx5060ti8gb",
@@ -54,16 +54,16 @@
       "moeda": "BRL",
       "loja": "KaBuM! · RadarGPU",
       "url": "https://radargpu.com.br/gpu/rtx-5060-ti-8gb/",
-      "fonte_em": "18/11 às 4h"
+      "fonte_em": "19/11 às 4h"
     },
     {
       "id": "radargpu-placas-rtx50608gb",
       "modelo": "RTX 5060 8 GB",
-      "preco": 2949.9,
+      "preco": 3099.0,
       "moeda": "BRL",
       "loja": "KaBuM! · RadarGPU",
       "url": "https://radargpu.com.br/gpu/rtx-5060/",
-      "fonte_em": "18/11 às 4h"
+      "fonte_em": "19/11 às 4h"
     },
     {
       "id": "radargpu-placas-rtx50508gb",
@@ -72,7 +72,7 @@
       "moeda": "BRL",
       "loja": "KaBuM! · RadarGPU",
       "url": "https://radargpu.com.br/gpu/rtx-5050/",
-      "fonte_em": "18/11 às 4h"
+      "fonte_em": "19/11 às 4h"
     },
     {
       "id": "radargpu-placas-rtx4060ti8gb",
@@ -81,7 +81,7 @@
       "moeda": "BRL",
       "loja": "KaBuM! · RadarGPU",
       "url": "https://radargpu.com.br/gpu/rtx-4060-ti/",
-      "fonte_em": "18/11 às 4h"
+      "fonte_em": "19/11 às 4h"
     },
     {
       "id": "radargpu-placas-rtx40608gb",
@@ -90,7 +90,7 @@
       "moeda": "BRL",
       "loja": "KaBuM! · RadarGPU",
       "url": "https://radargpu.com.br/gpu/rtx-4060/",
-      "fonte_em": "18/11 às 4h"
+      "fonte_em": "19/11 às 4h"
     },
     {
       "id": "radargpu-placas-rtx308010gb",
@@ -99,7 +99,7 @@
       "moeda": "BRL",
       "loja": "KaBuM! · RadarGPU",
       "url": "https://radargpu.com.br/gpu/rtx-3080/",
-      "fonte_em": "18/11 às 4h"
+      "fonte_em": "19/11 às 4h"
     },
     {
       "id": "radargpu-placas-rtx30708gb",
@@ -108,7 +108,7 @@
       "moeda": "BRL",
       "loja": "KaBuM! · RadarGPU",
       "url": "https://radargpu.com.br/gpu/rtx-3070/",
-      "fonte_em": "18/11 às 4h"
+      "fonte_em": "19/11 às 4h"
     },
     {
       "id": "radargpu-placas-rtx3060ti8gb",
@@ -117,7 +117,7 @@
       "moeda": "BRL",
       "loja": "KaBuM! · RadarGPU",
       "url": "https://radargpu.com.br/gpu/rtx-3060-ti/",
-      "fonte_em": "18/11 às 4h"
+      "fonte_em": "19/11 às 4h"
     },
     {
       "id": "radargpu-placas-rtx306012gb",
@@ -126,25 +126,25 @@
       "moeda": "BRL",
       "loja": "KaBuM! · RadarGPU",
       "url": "https://radargpu.com.br/gpu/rtx-3060/",
-      "fonte_em": "18/11 às 4h"
+      "fonte_em": "19/11 às 4h"
     },
     {
       "id": "radargpu-placas-rtx30508gb",
       "modelo": "RTX 3050 8 GB",
-      "preco": 2099.0,
+      "preco": 1861.9,
       "moeda": "BRL",
-      "loja": "Bemol · RadarGPU",
+      "loja": "KaBuM! · RadarGPU",
       "url": "https://radargpu.com.br/gpu/rtx-3050/",
-      "fonte_em": "18/11 às 4h"
+      "fonte_em": "19/11 às 4h"
     },
     {
       "id": "radargpu-placas-rx9070xt16gb",
       "modelo": "RX 9070 XT 16 GB",
-      "preco": 7198.8,
+      "preco": 7099.99,
       "moeda": "BRL",
       "loja": "KaBuM! · RadarGPU",
       "url": "https://radargpu.com.br/gpu/rx-9070-xt/",
-      "fonte_em": "18/11 às 4h"
+      "fonte_em": "19/11 às 4h"
     },
     {
       "id": "radargpu-placas-rx9070gre12gb",
@@ -153,7 +153,7 @@
       "moeda": "BRL",
       "loja": "KaBuM! · RadarGPU",
       "url": "https://radargpu.com.br/gpu/rx-9070-gre/",
-      "fonte_em": "18/11 às 4h"
+      "fonte_em": "19/11 às 4h"
     },
     {
       "id": "radargpu-placas-rx907016gb",
@@ -162,16 +162,16 @@
       "moeda": "BRL",
       "loja": "KaBuM! · RadarGPU",
       "url": "https://radargpu.com.br/gpu/rx-9070/",
-      "fonte_em": "18/11 às 4h"
+      "fonte_em": "19/11 às 4h"
     },
     {
       "id": "radargpu-placas-rx9060xt16gb",
       "modelo": "RX 9060 XT 16 GB",
-      "preco": 4377.78,
+      "preco": 4455.74,
       "moeda": "BRL",
-      "loja": "KaBuM! · RadarGPU",
+      "loja": "WebContinental · RadarGPU",
       "url": "https://radargpu.com.br/gpu/rx-9060-xt/",
-      "fonte_em": "18/11 às 4h"
+      "fonte_em": "19/11 às 4h"
     },
     {
       "id": "radargpu-placas-rx9060xt8gb",
@@ -180,7 +180,7 @@
       "moeda": "BRL",
       "loja": "WebContinental · RadarGPU",
       "url": "https://radargpu.com.br/gpu/rx-9060-xt-8gb/",
-      "fonte_em": "18/11 às 4h"
+      "fonte_em": "19/11 às 4h"
     },
     {
       "id": "radargpu-placas-rx7600xt16gb",
@@ -189,7 +189,7 @@
       "moeda": "BRL",
       "loja": "KaBuM! · RadarGPU",
       "url": "https://radargpu.com.br/gpu/rx-7600-xt/",
-      "fonte_em": "18/11 às 4h"
+      "fonte_em": "19/11 às 4h"
     },
     {
       "id": "radargpu-placas-rx76008gb",
@@ -198,7 +198,7 @@
       "moeda": "BRL",
       "loja": "KaBuM! · RadarGPU",
       "url": "https://radargpu.com.br/gpu/rx-7600/",
-      "fonte_em": "18/11 às 4h"
+      "fonte_em": "19/11 às 4h"
     },
     {
       "id": "radargpu-placas-rx6800xt16gb",
@@ -207,7 +207,7 @@
       "moeda": "BRL",
       "loja": "WebContinental · RadarGPU",
       "url": "https://radargpu.com.br/gpu/rx-6800-xt/",
-      "fonte_em": "18/11 às 4h"
+      "fonte_em": "19/11 às 4h"
     },
     {
       "id": "radargpu-placas-rx6700xt12gb",
@@ -216,7 +216,7 @@
       "moeda": "BRL",
       "loja": "KaBuM! · RadarGPU",
       "url": "https://radargpu.com.br/gpu/rx-6700-xt/",
-      "fonte_em": "18/11 às 4h"
+      "fonte_em": "19/11 às 4h"
     },
     {
       "id": "radargpu-placas-arcb57010gb",
@@ -225,7 +225,7 @@
       "moeda": "BRL",
       "loja": "WebContinental · RadarGPU",
       "url": "https://radargpu.com.br/gpu/arc-b570/",
-      "fonte_em": "18/11 às 4h"
+      "fonte_em": "19/11 às 4h"
     }
   ],
   "erros": []
